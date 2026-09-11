@@ -231,8 +231,15 @@ AIVOA/
 | `PORT` | `8000` | Backend API server port. |
 | `ALLOWED_ORIGINS`| `http://localhost:5173,http://localhost:3000` | CORS permitted origins. |
 
----
+## ✍️ A Personal Note from the Developer
 
-## 📜 License
+Thank you for taking the time to review **AIVOA**! 
 
-Distributed under the **MIT License**. Open-source and free to use.
+This project was built with a strong focus on real-world engineering challenges in pharmaceutical manufacturing—bridging unstructured customer feedback with strict regulatory Quality Management Systems (QMS) and ICH Q9 risk standards.
+
+**Key Design & Engineering Principles behind this build:**
+- **Zero-Friction Reliability**: Designed with automatic fallbacks so that any reviewer or team member can clone and run the application immediately without database configuration headaches.
+- **Robust AI Guardrails**: Implemented relevance gating and multi-step state management with **LangGraph** to ensure AI stays accurate, reproducible, and free from hallucinations.
+- **Human-in-the-Loop Workflow**: Empowering QA specialists by automating data intake while preserving full manual control and real-time form editing.
+
+If you have any feedback, questions, or would like to discuss the technical architecture, feel free to reach out. I hope you enjoy exploring the project! 🚀
