@@ -1,0 +1,15 @@
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+.env
+*.db
+*.sqlite
+*.sqlite3
+aivoa_qms.db
+.git
+.gitignore

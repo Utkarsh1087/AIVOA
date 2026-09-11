@@ -1,0 +1,16 @@
+CUSTOMER COMPLAINT INCIDENT REPORT
+----------------------------------
+Customer: ABC Healthcare Facilities
+Date: 2026-09-10
+Source: Customer Field Incident Notice
+
+PRODUCT DETAILS:
+Product Name: Paracetamol 500mg Tablets
+Batch / Lot Number: PCM202604
+Affected Quantity: 20 boxes (400 blister strips total)
+
+INCIDENT DESCRIPTION:
+Upon unboxing shipment box #3 from lot PCM202604, our hospital pharmacy staff noticed that 20 packaging units exhibited severely crushed foil blister seals and broken tablet fragments inside the cartons. Fine white pharmaceutical powder residue was observed on the inner box walls.
+
+Urgent request for quality investigation, lot quarantine advice, and replacement stock.
+----------------------------------
