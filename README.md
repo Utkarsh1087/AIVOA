@@ -1,59 +1,37 @@
-# AIVOA - Pharmaceutical QMS AI Copilot & Complaint Management System
+# AIVOA — AI-Powered Pharmaceutical Quality Assurance (QMS) Copilot
 
-> **Enterprise-grade Quality Management System (QMS) powered by LangGraph, Groq Gemma2-9b-it, FastAPI, React 18, and Redux Toolkit.**
+> **An intelligent Quality Management System that automatically extracts, validates, risk-scores, and generates CAPA plans for pharmaceutical product complaints.**
 
-[![FastAPI](https://img.shields.io/badge/FastAPI-0.110+-009688.svg?style=flat&logo=FastAPI&logoColor=white)](https://fastapi.tiangolo.com)
-[![React](https://img.shields.io/badge/React-18.x-61DAFB.svg?style=flat&logo=react&logoColor=black)](https://reactjs.org)
-[![Redux Toolkit](https://img.shields.io/badge/Redux_Toolkit-2.x-764ABC.svg?style=flat&logo=redux&logoColor=white)](https://redux-toolkit.js.org)
-[![LangGraph](https://img.shields.io/badge/LangGraph-StateGraph_DAG-FF6F00.svg?style=flat)](https://github.com/langchain-ai/langgraph)
-[![Groq](https://img.shields.io/badge/Groq_API-Gemma2_9b_it-F05032.svg?style=flat)](https://groq.com)
-[![Docker](https://img.shields.io/badge/Docker_Ready-Compose-2496ED.svg?style=flat&logo=docker&logoColor=white)](https://docker.com)
-[![SQLAlchemy](https://img.shields.io/badge/SQLAlchemy-2.0+-D71F00.svg?style=flat&logo=sqlalchemy&logoColor=white)](https://www.sqlalchemy.org)
-
----
-
-## 🌟 Executive Overview
-
-**AIVOA** is an enterprise Pharmaceutical Quality Assurance (QA) and Quality Management System (QMS) platform designed to automate the intake, structuring, validation, risk scoring, and CAPA planning of pharmaceutical product complaints across API & FDF (Finished Dosage Form) manufacturing sites.
-
-### Key Capabilities
-- **Multi-Modal Document Intake**: Accepts raw text prompts, PDF attachments, EML email files, and image OCR input.
-- **LangGraph Multi-Step DAG Workflow**: Statefully orchestrates extraction, relevance gating, completeness validation, duplicate detection, ICH Q9 risk assessment, and CAPA recommendations.
-- **Groq LLM Acceleration**: Powered by Groq `gemma2-9b-it` (with `llama-3.3-70b-versatile` fallback) for ultra-fast structured JSON responses.
-- **Strict Relevance Gating**: Automatically rejects non-pharmaceutical documents (e.g. resumes, IT manuals) with clear feedback, preventing hallucinations.
-- **Auto-Populated & Editable Form**: Extracted complaint data automatically populates the QMS "Log Customer Complaint" form, while remaining 100% editable by QA specialists.
-- **AI Copilot Risk Assessment**: Evaluates risk level (`High`, `Medium`, `Low`), severity (`Critical`, `Major`, `Minor`), rationale, potential batch impact, root causes (5-Why/Ishikawa), and CAPA plans.
-- **Duplicate Complaint Detection**: Automatically queries database history to flag duplicate complaints matching identical batch numbers or products.
-- **Executive QMS Dashboard**: Visualizes risk distribution, active investigation lifecycles, and quality metrics.
+[![FastAPI](https://img.shields.io/badge/Backend-FastAPI-009688.svg?style=for-the-badge&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)
+[![React](https://img.shields.io/badge/Frontend-React_18-61DAFB.svg?style=for-the-badge&logo=react&logoColor=black)](https://reactjs.org)
+[![Redux Toolkit](https://img.shields.io/badge/State-Redux_Toolkit-764ABC.svg?style=for-the-badge&logo=redux&logoColor=white)](https://redux-toolkit.js.org)
+[![LangGraph](https://img.shields.io/badge/AI_Engine-LangGraph_DAG-FF6F00.svg?style=for-the-badge)](https://github.com/langchain-ai/langgraph)
+[![Groq](https://img.shields.io/badge/LLM-Groq_Gemma2_9b-F05032.svg?style=for-the-badge)](https://groq.com)
+[![Docker](https://img.shields.io/badge/Docker-Ready-2496ED.svg?style=for-the-badge&logo=docker&logoColor=white)](https://docker.com)
+[![Supabase](https://img.shields.io/badge/Database-PostgreSQL_%2F_SQLite-3ECF8E.svg?style=for-the-badge&logo=supabase&logoColor=white)](https://supabase.com)
 
 ---
 
-## 🚀 Quick Start (Under 2 Minutes)
+## 📌 What is AIVOA? (In Simple Words)
 
-You can run the entire system using **Docker Compose** or directly via **Standard Local Scripts**.
+When pharmaceutical companies receive customer complaints (e.g., broken tablet blister packs, contaminated vials, or leaking bottles), QA teams have to read unstructured emails/PDFs and manually enter them into complex QMS forms.
 
-### Method 1: Docker Compose (Recommended)
-
-Requires only [Docker Desktop](https://www.docker.com/products/docker-desktop/):
-
-```bash
-# 1. Clone repository
-git clone https://github.com/your-username/aivoa.git
-cd aivoa
-
-# 2. Start all services (Backend + Frontend)
-docker compose up --build
-```
-- **Web App**: [http://localhost:3000](http://localhost:3000)
-- **FastAPI Interactive Swagger Docs**: [http://localhost:8000/docs](http://localhost:8000/docs)
+**AIVOA solves this:**
+1. **Drop any file or text** (Email, PDF report, or message) into the AI Copilot.
+2. **AI automatically parses the details** (Customer, Product, Batch #, Dates, NPM material, and Defect summary) and fills out the official QMS Form.
+3. **AI calculates ICH Q9 Risk & CAPA** (Evaluates Severity, Risk Level, Root Causes, and Immediate Containment Actions).
+4. **Human in the Loop**: The QA specialist can review, edit any field in real time, and save directly to the database.
+5. **Relevance Protection**: Irrelevant documents (e.g. resumes, software manuals) are automatically rejected to prevent hallucinations.
 
 ---
 
-### Method 2: One-Click Local Run
+## ⚡ How to Run the Project (Choose Any Option)
+
+### 🥇 Option 1: The Easiest Way (One-Click Script)
 
 #### On Windows:
+Double-click `run-dev.bat` or run in terminal:
 ```cmd
-# Double click or run:
 run-dev.bat
 ```
 
@@ -62,132 +40,199 @@ run-dev.bat
 chmod +x run-dev.sh
 ./run-dev.sh
 ```
+> *This automatically starts both the FastAPI backend and the React frontend in parallel!*
 
 ---
 
-### Method 3: Manual Step-by-Step Setup
+### 🐳 Option 2: Run with Docker Compose (Zero Setup)
 
-#### 1. Backend Setup
+If you have [Docker Desktop](https://www.docker.com/products/docker-desktop/) installed:
+
 ```bash
+docker compose up --build
+```
+- **Frontend App**: [http://localhost:3000](http://localhost:3000)
+- **Backend API & Swagger Docs**: [http://localhost:8000/docs](http://localhost:8000/docs)
+
+---
+
+### 🛠️ Option 3: Manual Step-by-Step Setup
+
+#### Step 1: Start the Backend (Python FastAPI)
+```bash
+# 1. Navigate to backend
 cd backend
+
+# 2. Create and activate a virtual environment
 python -m venv venv
 
-# Windows
+# On Windows:
 venv\Scripts\activate
-# Mac / Linux
+# On Mac/Linux:
 source venv/bin/activate
 
+# 3. Install dependencies
 pip install -r requirements.txt
+
+# 4. Create your .env file
 cp .env.example .env
 
-# Start Backend
+# 5. Start backend server
 python main.py
 ```
-> Backend runs at `http://localhost:8000`
+> Backend runs at: **`http://localhost:8000`**  
+> Interactive API Documentation: **`http://localhost:8000/docs`**
 
-#### 2. Frontend Setup
+#### Step 2: Start the Frontend (React + Vite)
+Open a new terminal window:
 ```bash
+# 1. Navigate to frontend
 cd frontend
+
+# 2. Install dependencies
 npm install
+
+# 3. Start development server
 npm run dev
 ```
-> Frontend runs at `http://localhost:5173`
+> Frontend runs at: **`http://localhost:5173`**
 
 ---
 
-## 💾 Database Configuration
+## 💾 Database Options (Zero Configuration)
 
-The application features a **smart zero-configuration database architecture**:
-- **Default (Zero Setup Needed)**: Runs out-of-the-box on an optimized local **SQLite** database (`aivoa_qms.db`) with Write-Ahead Logging (WAL).
-- **Cloud / Production (PostgreSQL / MySQL)**: Connect any cloud PostgreSQL (e.g., Supabase, Neon.tech, AWS RDS) by setting `DATABASE_URL` in `backend/.env`:
-  ```env
-  DATABASE_URL=postgresql://user:password@host:5432/dbname
-  ```
-- **Automatic Fallback**: If remote database credentials are not present, the backend seamlessly defaults to local SQLite without crashing, ensuring an effortless evaluation experience for reviewers.
+AIVOA has a **smart dual-database system**:
+
+| Mode | Configuration | Description |
+| :--- | :--- | :--- |
+| **Local SQLite (Default)** | **Zero setup required** | Creates `aivoa_qms.db` automatically with Write-Ahead Logging (WAL). |
+| **Cloud PostgreSQL** | Set `DATABASE_URL` in `.env` | Connects directly to **Supabase**, **Neon.tech**, or any PostgreSQL host. |
+| **Automatic Fallback** | Built-in safety | If remote database credentials are not present, the app seamlessly defaults to local SQLite without crashing. |
 
 ---
 
-## 🔄 LangGraph AI Workflow Architecture
+## 🧠 How the AI Engine Works (LangGraph Workflow)
 
-The backend AI engine uses **LangGraph** to execute a stateful, multi-step Directed Acyclic Graph (DAG):
+The backend uses a stateful **LangGraph Directed Acyclic Graph (DAG)** pipeline:
 
 ```
-[START]
-   ↓
-1. Input Processing Node (Cleans text & metadata)
-   ↓
-2. Relevance Gating & Extraction Node (Groq gemma2-9b-it parses pharma fields)
-   ↓
-3. Completeness Validation Node (Calculates confidence & missing fields)
-   ↓
-4. Duplicate Complaint Detection Node (Scans DB history for batch/product matches)
-   ↓
-5. Risk & Severity Assessment Node (ICH Q9 QRM Risk Scoring)
-   ↓
-6. Root Cause & CAPA Recommendation Node (Generates QMS containment & preventive actions)
-   ↓
-7. Structured Final Output Node
-   ↓
-[END]
+[Start Input: Text / PDF / Email]
+               ↓
+    1. Input Processing Node
+       (Cleans metadata & raw text)
+               ↓
+    2. Relevance Gating & Extraction Node
+       (Groq Gemma2-9b-it parses fields; rejects non-pharma docs)
+               ↓
+    3. Completeness Validation Node
+       (Calculates QA confidence score & flags missing data)
+               ↓
+    4. Duplicate Check Node
+       (Scans database history for matching batch numbers)
+               ↓
+    5. ICH Q9 Risk Assessment Node
+       (Scores Severity: Critical/Major/Minor & Risk: High/Med/Low)
+               ↓
+    6. CAPA & Root Cause Node
+       (Suggests 5-Why root causes & preventive actions)
+               ↓
+    7. Final Structured Output Node
+               ↓
+[Auto-populates QMS Form & Updates UI]
 ```
 
 ---
 
-## 🧪 Sample Cases to Test in UI
+## 🎯 Sample Test Cases to Try in the UI
 
-Use the **"✨ Sample Cases"** button in the AIVOA Copilot or test these prompts:
+You can click the **"✨ Sample Cases"** button inside the AIVOA Copilot in the app, or copy-paste these test scenarios:
 
-### Case 1: High Risk Sterile Vial Contamination
+### Test Case 1: High Risk — Contaminated Sterile Vial
 ```text
 Customer: Apollo Specialty Hospital
 Product: Meropenem for Injection 1g
 Batch: MRP202609A
-MFG: 2026-06-01 | EXP: 2028-05-31
-Qty: 15 vials
+MFG Date: 2026-06-01 | EXP Date: 2028-05-31
+Affected Quantity: 15 vials
 Description: Dark particulate matter observed floating inside intact sterile vial upon reconstitution.
 ```
+> **Expected AI Result:** High Risk / Critical Severity. Immediate batch quarantine, retention sample inspection, and line filter audit recommended.
 
-### Case 2: Broken Tamper Seal & Discoloration
+---
+
+### Test Case 2: Major Risk — Broken Seals & Discoloration
 ```text
 Customer: Max Healthcare Pharmacy
 Product: Amoxicillin Capsules 500mg
 Batch: AMX240602
-Qty: 12 bottles
+Affected Quantity: 12 bottles
 Description: Tamper-evident seals broken on outer bottles with yellowish discoloration of powder.
 ```
+> **Expected AI Result:** Medium/High Risk. Container closure integrity review and packaging torque verification recommended.
 
-### Case 3: Irrelevant Document Rejection Test
+---
+
+### Test Case 3: Negative Test — Irrelevant Document Rejection
 ```text
 John Doe - Full Stack Developer Resume
-Skills: React, Node.js, Python, Docker
-Experience: 3 years building web applications
+Experience: 3 years building web applications with React and Python.
+Skills: TypeScript, Docker, PostgreSQL, REST APIs.
 ```
-> *Result: AI correctly flags document as non-complaint, preserves empty form, and provides clear user notification.*
+> **Expected AI Result:** AI safely detects that the document is not a pharmaceutical complaint, leaves the form blank, and alerts the user without generating fake data.
 
 ---
 
-## 🛠️ Technology Stack Breakdown
+## 📁 Project Structure
 
-| Component | Technology | Purpose |
+```text
+AIVOA/
+├── backend/
+│   ├── app/
+│   │   ├── ai/                # LangGraph workflow, nodes, prompts & Groq client
+│   │   ├── routes/            # FastAPI REST endpoints (/api/complaints)
+│   │   ├── utils/             # Multi-modal parsers (PDF, EML, Image OCR)
+│   │   ├── config.py          # Environment settings
+│   │   ├── database.py        # SQLAlchemy multi-DB connection with SQLite fallback
+│   │   ├── models.py          # Database schema (Complaints, CAPA, Risk)
+│   │   └── schemas.py         # Pydantic validation schemas
+│   ├── Dockerfile             # Backend Docker container definition
+│   ├── requirements.txt       # Python dependencies
+│   └── main.py                # Application entrypoint
+│
+├── frontend/
+│   ├── src/
+│   │   ├── components/        # React UI Components (ComplaintForm, Copilot, Dashboard, List)
+│   │   ├── store/             # Redux Toolkit store and async thunks
+│   │   ├── services/          # API Axios/Fetch client
+│   │   ├── App.jsx            # Main app shell & fixed layout
+│   │   └── index.css          # Modern QMS glassmorphic design system
+│   ├── Dockerfile             # Frontend multi-stage Docker build
+│   ├── nginx.conf             # Production Nginx reverse proxy
+│   └── package.json           # Node.js dependencies
+│
+├── docker-compose.yml         # Full-stack container orchestration
+├── run-dev.bat                # Windows 1-click startup
+├── run-dev.sh                 # Mac/Linux 1-click startup
+├── .env.example               # Environment variables template
+├── .gitignore                 # Protected secrets & build artifacts
+└── README.md                  # Project documentation
+```
+
+---
+
+## ⚙️ Environment Variables Reference
+
+| Variable | Default Value | Description |
 | :--- | :--- | :--- |
-| **Frontend** | React 18, Vite | High performance single-page application |
-| **State Management** | Redux Toolkit | Centralized state, thunks, and persistent store |
-| **Icons & Design** | Lucide React, Glassmorphism CSS | Clean, enterprise pharma QMS aesthetic |
-| **Backend** | Python 3.11+, FastAPI | High concurrency REST API with async endpoints |
-| **AI Orchestration** | LangGraph | Stateful Directed Acyclic Graph (DAG) pipeline |
-| **LLM Engine** | Groq API (Gemma2-9b-it) | Sub-second structured JSON inference |
-| **Database** | SQLAlchemy 2.0 | Multi-database ORM (PostgreSQL, MySQL, SQLite) |
-| **Containerization** | Docker & Docker Compose | Multi-container reproducible production deployment |
+| `GROQ_API_KEY` | *(Get free at console.groq.com)* | Groq Cloud API key for ultra-fast LLM inference. |
+| `PRIMARY_LLM` | `gemma2-9b-it` | Primary LLM model for extraction and reasoning. |
+| `SECONDARY_LLM` | `llama-3.3-70b-versatile` | Secondary fallback model. |
+| `DATABASE_URL` | `sqlite:///./aivoa_qms.db` | Database connection string (SQLite, PostgreSQL, or MySQL). |
+| `PORT` | `8000` | Backend API server port. |
+| `ALLOWED_ORIGINS`| `http://localhost:5173,http://localhost:3000` | CORS permitted origins. |
 
 ---
 
-## 📜 API Documentation
+## 📜 License
 
-Interactive OpenAPI / Swagger documentation is available out of the box at:
-- **Swagger UI**: `http://localhost:8000/docs`
-- **ReDoc UI**: `http://localhost:8000/redoc`
-
----
-
-## 📄 License
-This project is open-source under the MIT License.
+Distributed under the **MIT License**. Open-source and free to use.
