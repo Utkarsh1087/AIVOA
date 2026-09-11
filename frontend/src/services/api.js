@@ -8,6 +8,23 @@ if (rawUrl.startsWith('http://') || rawUrl.startsWith('https://')) {
 }
 const API_BASE = rawUrl;
 
+async function parseResponse(res, defaultError = 'Request failed') {
+  const text = await res.text();
+  let data;
+  try {
+    data = JSON.parse(text);
+  } catch (e) {
+    if (!res.ok) {
+      throw new Error(`Server returned status ${res.status}: ${res.statusText || defaultError}`);
+    }
+    throw new Error('Invalid JSON response received from API server.');
+  }
+  if (!res.ok) {
+    throw new Error(data?.detail || defaultError);
+  }
+  return data;
+}
+
 export const api = {
   async analyzeText(inputText, source = 'Text Prompt') {
     const res = await fetch(`${API_BASE}/complaints/analyze`, {
@@ -15,11 +32,7 @@ export const api = {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ input_text: inputText, source })
     });
-    if (!res.ok) {
-      const err = await res.json().catch(() => ({ detail: 'Failed to analyze text' }));
-      throw new Error(err.detail || 'Analysis request failed');
-    }
-    return await res.json();
+    return await parseResponse(res, 'Analysis request failed');
   },
 
   async uploadFile(file, sourceType = 'File Upload') {
@@ -31,11 +44,7 @@ export const api = {
       method: 'POST',
       body: formData
     });
-    if (!res.ok) {
-      const err = await res.json().catch(() => ({ detail: 'Failed to upload file' }));
-      throw new Error(err.detail || 'File processing request failed');
-    }
-    return await res.json();
+    return await parseResponse(res, 'File processing request failed');
   },
 
   async saveComplaint(payload) {
@@ -44,11 +53,7 @@ export const api = {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     });
-    if (!res.ok) {
-      const err = await res.json().catch(() => ({ detail: 'Failed to save complaint' }));
-      throw new Error(err.detail || 'Save complaint failed');
-    }
-    return await res.json();
+    return await parseResponse(res, 'Save complaint failed');
   },
 
   async getComplaints(params = {}) {
@@ -59,14 +64,12 @@ export const api = {
 
     const url = `${API_BASE}/complaints?${query.toString()}`;
     const res = await fetch(url);
-    if (!res.ok) throw new Error('Failed to fetch complaints history');
-    return await res.json();
+    return await parseResponse(res, 'Failed to fetch complaints history');
   },
 
   async getComplaintDetail(id) {
     const res = await fetch(`${API_BASE}/complaints/${id}`);
-    if (!res.ok) throw new Error('Failed to fetch complaint detail');
-    return await res.json();
+    return await parseResponse(res, 'Failed to fetch complaint detail');
   },
 
   async reAssessRisk(id, formData) {
@@ -75,14 +78,12 @@ export const api = {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData)
     });
-    if (!res.ok) throw new Error('Risk re-assessment failed');
-    return await res.json();
+    return await parseResponse(res, 'Risk re-assessment failed');
   },
 
   async getDashboardStats() {
     const res = await fetch(`${API_BASE}/complaints/stats/dashboard`);
-    if (!res.ok) throw new Error('Failed to fetch dashboard metrics');
-    return await res.json();
+    return await parseResponse(res, 'Failed to fetch dashboard metrics');
   },
 
   async assistantChat(message, context = {}) {
@@ -91,10 +92,6 @@ export const api = {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ message, context })
     });
-    if (!res.ok) {
-      const err = await res.json().catch(() => ({ detail: 'Chat request failed' }));
-      throw new Error(err.detail || 'Chat request failed');
-    }
-    return await res.json();
+    return await parseResponse(res, 'Chat request failed');
   }
 };
