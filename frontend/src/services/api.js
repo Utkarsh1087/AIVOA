@@ -1,4 +1,12 @@
-const API_BASE = (import.meta.env.VITE_API_URL || '/api').replace(/\/$/, '');
+let rawUrl = (import.meta.env.VITE_API_URL || '/api').trim().replace(/\/$/, '');
+if (rawUrl.startsWith('http://') || rawUrl.startsWith('https://')) {
+  if (!rawUrl.endsWith('/api')) {
+    rawUrl = `${rawUrl}/api`;
+  }
+} else if (!rawUrl.startsWith('/')) {
+  rawUrl = '/api';
+}
+const API_BASE = rawUrl;
 
 export const api = {
   async analyzeText(inputText, source = 'Text Prompt') {
