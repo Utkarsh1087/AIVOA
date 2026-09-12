@@ -2,6 +2,7 @@
 
 > **An intelligent Quality Management System that automatically extracts, validates, risk-scores, and generates CAPA plans for pharmaceutical product complaints.**
 
+[![Live Demo](https://img.shields.io/badge/Live_Demo-Vercel_App-000000.svg?style=for-the-badge&logo=vercel&logoColor=white)](https://frontend-git-main-utkarsh-rajputs-projects.vercel.app/)
 [![FastAPI](https://img.shields.io/badge/Backend-FastAPI-009688.svg?style=for-the-badge&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)
 [![React](https://img.shields.io/badge/Frontend-React_18-61DAFB.svg?style=for-the-badge&logo=react&logoColor=black)](https://reactjs.org)
 [![Redux Toolkit](https://img.shields.io/badge/State-Redux_Toolkit-764ABC.svg?style=for-the-badge&logo=redux&logoColor=white)](https://redux-toolkit.js.org)
@@ -9,6 +10,8 @@
 [![Groq](https://img.shields.io/badge/LLM-Groq_Gemma2_9b-F05032.svg?style=for-the-badge)](https://groq.com)
 [![Docker](https://img.shields.io/badge/Docker-Ready-2496ED.svg?style=for-the-badge&logo=docker&logoColor=white)](https://docker.com)
 [![Supabase](https://img.shields.io/badge/Database-PostgreSQL_%2F_SQLite-3ECF8E.svg?style=for-the-badge&logo=supabase&logoColor=white)](https://supabase.com)
+
+🔗 **Live Deployment:** [https://frontend-git-main-utkarsh-rajputs-projects.vercel.app/](https://frontend-git-main-utkarsh-rajputs-projects.vercel.app/)
 
 ---
 
