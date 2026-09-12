@@ -18,7 +18,8 @@ import {
   RotateCcw, 
   ArrowUp, 
   User, 
-  FlaskConical 
+  FlaskConical,
+  Check 
 } from 'lucide-react';
 import SampleDataSelector from './SampleDataSelector';
 
